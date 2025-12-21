@@ -1,0 +1,280 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Naam Jap & Gita</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #ffeb3b, #ff9800, #5d4037);
+      min-height: 100vh;
+      color: #fff;
+    }
+    header {
+      text-align: center;
+      padding: 16px 8px;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+    }
+    header h1 { font-size: 20px; margin-bottom: 4px; }
+    header p { font-size: 12px; opacity: 0.9; }
+
+    .tabs {
+      display: flex;
+      margin: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      background: rgba(0,0,0,0.2);
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: rgba(255,255,255,0.2);
+      font-weight: bold;
+    }
+
+    .page {
+      display: none;
+      padding: 16px;
+      animation: fadeIn 0.3s ease;
+    }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Naam Jap Counter styles */
+    .counter-card {
+      background: rgba(0,0,0,0.35);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .counter-card h2 { margin-bottom: 8px; font-size: 18px; }
+    .counts {
+      display: flex;
+      justify-content: space-around;
+      margin: 16px 0;
+      font-size: 16px;
+    }
+    .big-number {
+      font-size: 32px;
+      font-weight: bold;
+    }
+    .jap-button {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: none;
+      background: radial-gradient(circle at 30% 30%, #fff9c4, #ff5722);
+      color: #4e342e;
+      font-size: 22px;
+      font-weight: bold;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.6);
+      cursor: pointer;
+      margin: 12px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .jap-button:active {
+      transform: scale(0.96);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.7);
+    }
+    .reset-btn {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.7);
+      background: transparent;
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .info {
+      font-size: 12px;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+
+    /* Gita page */
+    .gita-wrapper {
+      background: rgba(0,0,0,0.35);
+      border-radius: 16px;
+      padding: 16px;
+      max-height: calc(100vh - 170px);
+      overflow-y: auto;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .gita-wrapper h2 { margin-bottom: 8px; font-size: 18px; }
+    .gita-wrapper p.desc {
+      font-size: 12px;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+    .adhyay {
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255,255,255,0.3);
+    }
+    .adhyay h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: #ffeb3b;
+    }
+    .shloka {
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 6px;
+      white-space: pre-wrap;
+    }
+    .note {
+      font-size: 11px;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Naam Jap & Gita</h1>
+    <p>108 naam = 1 mālā • Read Gita daily</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showPage('counter')">Naam Jap Counter</button>
+    <button class="tab-btn" onclick="showPage('gita')">Gita</button>
+  </div>
+
+  <!-- Naam Jap Counter Page -->
+  <div id="counter" class="page active">
+    <div class="counter-card">
+      <h2>Naam Jap Counter</h2>
+
+      <div class="counts">
+        <div>
+          <div>Current Count</div>
+          <div id="japCount" class="big-number">0</div>
+        </div>
+        <div>
+          <div>Mālā</div>
+          <div id="malaCount" class="big-number">0</div>
+        </div>
+      </div>
+
+      <button class="jap-button" onclick="doJap()">
+        Jap +
+      </button>
+
+      <button class="reset-btn" onclick="resetCounts()">Reset</button>
+
+      <div class="info">
+        Har 108 jap ke baad mālā count 1 se badhega, 
+        aur jap counter 0 ho jayega.
+      </div>
+    </div>
+  </div>
+
+  <!-- Gita Page -->
+  <div id="gita" class="page">
+    <div class="gita-wrapper">
+      <h2>Bhagavad Gita</h2>
+      <p class="desc">
+        Bhagavad Gita mein 18 adhyay aur lagbhag 700 shlokas hote hain. 
+        Yahaan structure diya hai, tum dhire‑dhire sab shlokas fill kar sakte ho. [web:57][web:59][web:61]
+      </p>
+
+      <!-- Example: Adhyay 1 with few sample shlok placeholders -->
+      <div class="adhyay">
+        <h3>Adhyay 1 – Arjuna Vishada Yoga</h3>
+        <div class="shloka">
+          <!-- Yahan asli shloka likho, e.g. Sanskrit/Hindi/English -->
+          1.1: (Yahan pe apna shloka likho)
+        </div>
+        <div class="shloka">
+          1.2: (Yahan pe agla shloka likho)
+        </div>
+        <!-- Is pattern ko follow karke aur shlokas add karte jaao -->
+      </div>
+
+      <!-- Example: Adhyay 2 block -->
+      <div class="adhyay">
+        <h3>Adhyay 2 – Sankhya Yoga</h3>
+        <div class="shloka">
+          2.1: (Yahan pe shloka likho)
+        </div>
+        <div class="shloka">
+          2.2: (Yahan pe shloka likho)
+        </div>
+      </div>
+
+      <!-- Baaki adhyay ke liye similar blocks bana sakte ho -->
+
+      <p class="note">
+        Tip: Online Gita websites dekh kar shloka copy karke 
+        yahan paste kar sakte ho (sirf original text, na ki unka 
+        special commentary format). [web:58][web:70][web:73]
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    function showPage(id) {
+      const pages = document.querySelectorAll('.page');
+      const buttons = document.querySelectorAll('.tab-btn');
+      pages.forEach(p => p.classList.remove('active'));
+      buttons.forEach(b => b.classList.remove('active'));
+
+      document.getElementById(id).classList.add('active');
+      if (id === 'counter') buttons[0].classList.add('active');
+      else buttons[1].classList.add('active');
+    }
+
+    // Naam jap logic
+    let japCount = 0;
+    let malaCount = 0;
+
+    function updateDisplay() {
+      document.getElementById('japCount').textContent = japCount;
+      document.getElementById('malaCount').textContent = malaCount;
+    }
+
+    function doJap() {
+      japCount += 1;
+      if (japCount >= 108) {
+        japCount = 0;
+        malaCount += 1;
+        // Optional: small vibration on phone (if supported)
+        if (navigator.vibrate) {
+          navigator.vibrate([80, 40, 80]);
+        }
+      }
+      updateDisplay();
+    }
+
+    function resetCounts() {
+      japCount = 0;
+      malaCount = 0;
+      updateDisplay();
+    }
+
+    // Initialize display
+    updateDisplay();
+  </script>
+</body>
+</html>
