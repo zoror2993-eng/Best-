@@ -1,0 +1,271 @@
+   <!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naam Jap & Gita</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    header {
+      background: linear-gradient(135deg, #4f46e5, #ec4899);
+      color: white;
+      text-align: center;
+      padding: 16px 10px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    header p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      background: #e5e7eb;
+    }
+    .nav-buttons button {
+      flex: 1;
+      max-width: 160px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #ffffff;
+      color: #111827;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .nav-buttons button.active {
+      background: #4f46e5;
+      color: white;
+    }
+
+    main {
+      padding: 16px;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    /* Naam Jap styles */
+    .counter-display {
+      text-align: center;
+      margin: 16px 0;
+    }
+    .counter-display .label {
+      font-size: 14px;
+      color: #6b7280;
+    }
+    .counter-display .value {
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+    .mala-display {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #4b5563;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .actions button {
+      flex: 1;
+      padding: 10px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-jap {
+      background: #22c55e;
+      color: white;
+    }
+    .btn-reset {
+      background: #ef4444;
+      color: white;
+    }
+
+    /* Gita styles */
+    .gita-section {
+      font-family: "Noto Sans Devanagari", Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .gita-section h2 {
+      margin-bottom: 8px;
+    }
+    .gita-intro {
+      font-size: 14px;
+      color: #4b5563;
+      margin-bottom: 14px;
+    }
+    .shloka-item {
+      background: #f9fafb;
+      border-radius: 10px;
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+    }
+    .shloka-item h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      color: #4f46e5;
+    }
+    .shloka {
+      font-size: 16px;
+      color: #111827;
+      font-weight: 600;
+    }
+    .meaning {
+      font-size: 14px;
+      color: #374151;
+      margin-top: 6px;
+    }
+
+    /* hide pages */
+    #naamJapPage,
+    #gitaPage {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>श्री नाम जप एवं गीता</h1>
+    <p>हर नाम जप के साथ एक एक कदम श्रीकृष्ण की ओर</p>
+  </header>
+
+  <div class="nav-buttons">
+    <button id="btnNaamJap" class="active" onclick="showPage('naamJap')">Naam Jap</button>
+    <button id="btnGita" onclick="showPage('gita')">Gita</button>
+  </div>
+
+  <main>
+    <!-- Naam Jap Page -->
+    <section id="naamJapPage" class="card">
+      <h2>Naam Jap Counter</h2>
+      <p class="gita-intro">हर क्लिक एक नाम जप है। 108 जप पूरे होने पर एक माला अपने आप बढ़ जाएगी।</p>
+
+      <div class="counter-display">
+        <div class="label">Current Count (0–108)</div>
+        <div id="japCount" class="value">0</div>
+
+        <div class="mala-display">
+          कुल माला: <span id="malaCount">0</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-jap" onclick="incrementJap()">Jap +1</button>
+        <button class="btn-reset" onclick="resetAll()">Reset</button>
+      </div>
+    </section>
+
+    <!-- Gita Page -->
+    <section id="gitaPage" class="card">
+      <div class="gita-section">
+        <h2>अध्याय १: अर्जुन विषाद योग</h2>
+        <p class="gita-intro">
+          भगवद गीता का प्रथम अध्याय कुरुक्षेत्र के युद्धभूमि का दृश्य और अर्जुन के भ्रम तथा विषाद को दिखाता है,
+          जहां से आगे श्रीकृष्ण का दिव्य उपदेश प्रारम्भ होता है।[web:52]
+        </p>
+
+        <div class="shloka-item">
+          <h3>१.१</h3>
+          <p class="shloka">
+            धृतराष्ट्र उवाच: धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः। मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय॥
+          </p>
+          <p class="meaning">
+            धृतराष्ट्र बोले—हे संजय! धर्मभूमि कुरुक्षेत्र में युद्ध की इच्छा से एकत्रित मेरे पुत्रों और पाण्डवों ने क्या किया?[web:59]
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // page switching
+    function showPage(page) {
+      const naamJapPage = document.getElementById('naamJapPage');
+      const gitaPage = document.getElementById('gitaPage');
+      const btnNaamJap = document.getElementById('btnNaamJap');
+      const btnGita = document.getElementById('btnGita');
+
+      if (page === 'naamJap') {
+        naamJapPage.style.display = 'block';
+        gitaPage.style.display = 'none';
+        btnNaamJap.classList.add('active');
+        btnGita.classList.remove('active');
+      } else {
+        naamJapPage.style.display = 'none';
+        gitaPage.style.display = 'block';
+        btnNaamJap.classList.remove('active');
+        btnGita.classList.add('active');
+      }
+    }
+
+    // Naam Jap logic with localStorage
+    let japCount = 0;
+    let malaCount = 0;
+
+    function loadCounts() {
+      const savedJap = localStorage.getItem('japCount');
+      const savedMala = localStorage.getItem('malaCount');
+      if (savedJap !== null) japCount = parseInt(savedJap, 10);
+      if (savedMala !== null) malaCount = parseInt(savedMala, 10);
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      document.getElementById('japCount').textContent = japCount;
+      document.getElementById('malaCount').textContent = malaCount;
+    }
+
+    function incrementJap() {
+      japCount++;
+      if (japCount >= 108) {
+        japCount = 0;
+        malaCount++;
+      }
+      localStorage.setItem('japCount', japCount);
+      localStorage.setItem('malaCount', malaCount);
+      updateDisplay();
+    }
+
+    function resetAll() {
+      japCount = 0;
+      malaCount = 0;
+      localStorage.setItem('japCount', japCount);
+      localStorage.setItem('malaCount', malaCount);
+      updateDisplay();
+    }
+
+    // initial load
+    loadCounts();
+    showPage('naamJap');
+  </script>
+</body>
+</html>
