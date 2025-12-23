@@ -202,6 +202,7 @@
         <div class="mala-display">
           कुल माला: <span id="malaCount">0</span>
         </div>
+         <p id="todayTotal">आज की कुल गिनती: 0</p>
       </div>
 
       <div class="actions">
@@ -462,9 +463,15 @@
     }
 
     function updateDisplay() {
-      document.getElementById('japCount').textContent = japCount;
-      document.getElementById('malaCount').textContent = malaCount;
-    }
+  document.getElementById('japCount').textContent = japCount;
+  document.getElementById('malaCount').textContent = malaCount;
+
+  const todayText = document.getElementById('todayTotal');
+  if (todayText) {
+    const totalToday = malaCount * 108 + japCount; // aaj ka कुल jap
+    todayText.textContent = `आज की कुल गिनती: ${totalToday}`;
+  }
+    } 
 
     function incrementJap() {
       japCount++;
