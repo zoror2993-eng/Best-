@@ -518,5 +518,67 @@
     loadCounts();
     showPage('naamJap');
   </script>
+   <div id="bhakti-chat" style="position: fixed; right: 16px; bottom: 16px; width: 260px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); font-family: system-ui; overflow: hidden; z-index: 9999;">
+  <div style="background: linear-gradient(90deg,#7b2ff7,#f107a3); color: #fff; padding: 8px 10px; font-size: 14px;">
+    श्री भक्ति सहायक
+  </div>
+  <div id="bhakti-messages" style="height: 180px; padding: 8px; font-size: 12px; overflow-y: auto;">
+    <div><b>Bot:</b> Radhe Radhe! Mujhse bhakti, कृष्ण, गीता, नाम जप ke baare me puchho 🙂</div>
+  </div>
+  <div style="display:flex; border-top:1px solid #eee;">
+    <input id="bhakti-input" type="text" placeholder="Apna prashn likho..."
+           style="flex:1; border:none; padding:6px 8px; font-size:12px; outline:none;">
+    <button id="bhakti-send" style="border:none; background:#7b2ff7; color:#fff; padding:0 10px; font-size:12px;">Send</button>
+  </div>
+</div>
+
+<script>
+  const inp = document.getElementById('bhakti-input');
+  const btn = document.getElementById('bhakti-send');
+  const box = document.getElementById('bhakti-messages');
+
+  function addMsg(sender, text) {
+    const div = document.createElement('div');
+    div.innerHTML = '<b>' + sender + ':</b> ' + text;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function getAnswer(q) {
+    const text = q.toLowerCase();
+
+    if (text.includes('naam') || text.includes('jap') || text.includes('jaap')) {
+      return 'Naam jap se mann shant hota hai, ahankar kam hota hai aur धीरे-धीरे मन भगवत naam me लगने लगता hai.';
+    }
+    if (text.includes('108')) {
+      return '108 mala isliye chalti hai kyunki 108 ko shubh aur sampoorn sankhya maana gaya hai – upanishad, gopi, nakshatra, sab se juda hua.';
+    }
+    if (text.includes('gita') || text.includes('geeta')) {
+      return 'Bhagavad Gita hume jeevan me kartavya, nishkaam karma, bhakti aur gyaan ka santulan sikhati hai.';
+    }
+    if (text.includes('krishna') || text.includes('shri krishna')) {
+      return 'Shri Krishna prem, karuna, buddhi aur dharma ke aaradhya hain; unka naam lene se hi mann halka lagne lagta hai.';
+    }
+    if (text.includes('kaise shuru') || text.includes('start') || text.includes('begin')) {
+      return 'Roz subah ya raat ko kam se kam 5–10 minute “Hare Krishna” ya apne Ishta dev ka naam le kar shaant baitho, yahi se bhakti shuru ho jaati hai.';
+    }
+
+    return 'Main sirf bhakti, Gita, Krishna, naam jap jaise vishyon par madad karta hoon. Kripya apna prashn unhi se juda hua poochho.';
+  }
+
+  function handleSend() {
+    const q = inp.value.trim();
+    if (!q) return;
+    addMsg('You', q);
+    const ans = getAnswer(q);
+    addMsg('Bot', ans);
+    inp.value = '';
+  }
+
+  btn.addEventListener('click', handleSend);
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleSend();
+  });
+</script>
 </body>
 </html>
