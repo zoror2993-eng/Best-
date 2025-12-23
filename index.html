@@ -535,14 +535,14 @@
     <button id="bhakti-send" style="border:none; background:#7b2ff7; color:#fff; padding:0 10px; font-size:12px;">Send</button>
   </div>
 </div>
-
-<script>
+   <script>
   const bubble = document.getElementById('bhakti-bubble');
   const chatBox = document.getElementById('bhakti-chat');
   const inp = document.getElementById('bhakti-input');
   const btn = document.getElementById('bhakti-send');
   const box = document.getElementById('bhakti-messages');
 
+  // bubble se chat open / close
   bubble.addEventListener('click', () => {
     const visible = chatBox.style.display === 'block';
     chatBox.style.display = visible ? 'none' : 'block';
@@ -593,10 +593,12 @@
   }
 
   btn.addEventListener('click', handleSend);
-  inp.addEventListener('keydown', e => {
-    if (e.key === 'Enter') handleSend();
+  inp.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      handleSend();
+    }
   });
 </script>
 <!-- Bhakti Q&A Chat end -->
-</body>
+   </body>
 </html>
