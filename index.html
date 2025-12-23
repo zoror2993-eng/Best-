@@ -518,24 +518,35 @@
     loadCounts();
     showPage('naamJap');
   </script>
-   <div id="bhakti-chat" style="position: fixed; right: 16px; bottom: 16px; width: 260px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); font-family: system-ui; overflow: hidden; z-index: 9999;">
-  <div style="background: linear-gradient(90deg,#7b2ff7,#f107a3); color: #fff; padding: 8px 10px; font-size: 14px;">
+   <!-- Bhakti Q&A Chat (number menu) -->
+<div id="bhakti-bubble" style="position:fixed; right:16px; bottom:16px; width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,#7b2ff7,#f107a3); box-shadow:0 4px 12px rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center; color:#fff; font-size:22px; cursor:pointer; z-index:9999;">
+  ॐ
+</div>
+
+<div id="bhakti-chat" style="position:fixed; right:16px; bottom:76px; width:260px; background:#ffffff; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.35); font-family:system-ui; overflow:hidden; display:none; z-index:9999;">
+  <div style="background:linear-gradient(90deg,#7b2ff7,#f107a3); color:#fff; padding:8px 10px; font-size:14px;">
     श्री भक्ति सहायक
   </div>
-  <div id="bhakti-messages" style="height: 180px; padding: 8px; font-size: 12px; overflow-y: auto;">
-    <div><b>Bot:</b> Radhe Radhe! Mujhse bhakti, कृष्ण, गीता, नाम जप ke baare me puchho 🙂</div>
+  <div id="bhakti-messages" style="height:180px; padding:8px; font-size:12px; overflow-y:auto; white-space:pre-line;">
+    <div><b>Bot:</b> Radhe Radhe! Pehle "menu" ya 0 type karo, fir 1–4 number se prashn chuno.</div>
   </div>
   <div style="display:flex; border-top:1px solid #eee;">
-    <input id="bhakti-input" type="text" placeholder="Apna prashn likho..."
-           style="flex:1; border:none; padding:6px 8px; font-size:12px; outline:none;">
+    <input id="bhakti-input" type="text" placeholder="Apna prashn ya number likho..." style="flex:1; border:none; padding:6px 8px; font-size:12px; outline:none;">
     <button id="bhakti-send" style="border:none; background:#7b2ff7; color:#fff; padding:0 10px; font-size:12px;">Send</button>
   </div>
 </div>
 
 <script>
+  const bubble = document.getElementById('bhakti-bubble');
+  const chatBox = document.getElementById('bhakti-chat');
   const inp = document.getElementById('bhakti-input');
   const btn = document.getElementById('bhakti-send');
   const box = document.getElementById('bhakti-messages');
+
+  bubble.addEventListener('click', () => {
+    const visible = chatBox.style.display === 'block';
+    chatBox.style.display = visible ? 'none' : 'block';
+  });
 
   function addMsg(sender, text) {
     const div = document.createElement('div');
@@ -545,25 +556,31 @@
   }
 
   function getAnswer(q) {
-    const text = q.toLowerCase();
+    const raw = q.trim();
+    const text = raw.toLowerCase();
 
-    if (text.includes('naam') || text.includes('jap') || text.includes('jaap')) {
-      return 'Naam jap se mann shant hota hai, ahankar kam hota hai aur धीरे-धीरे मन भगवत naam me लगने लगता hai.';
-    }
-    if (text.includes('108')) {
-      return '108 mala isliye chalti hai kyunki 108 ko shubh aur sampoorn sankhya maana gaya hai – upanishad, gopi, nakshatra, sab se juda hua.';
-    }
-    if (text.includes('gita') || text.includes('geeta')) {
-      return 'Bhagavad Gita hume jeevan me kartavya, nishkaam karma, bhakti aur gyaan ka santulan sikhati hai.';
-    }
-    if (text.includes('krishna') || text.includes('shri krishna')) {
-      return 'Shri Krishna prem, karuna, buddhi aur dharma ke aaradhya hain; unka naam lene se hi mann halka lagne lagta hai.';
-    }
-    if (text.includes('kaise shuru') || text.includes('start') || text.includes('begin')) {
-      return 'Roz subah ya raat ko kam se kam 5–10 minute “Hare Krishna” ya apne Ishta dev ka naam le kar shaant baitho, yahi se bhakti shuru ho jaati hai.';
+    if (text === 'menu' || text === '0') {
+      return 'Prashn chunne ke liye number type kare:
+1) Roz kitni mala karein?
+2) Naam jap kaise karein?
+3) 108 ka kya matlab hai?
+4) Bhagavad Gita kya sikhati hai?';
     }
 
-    return 'Main sirf bhakti, Gita, Krishna, naam jap jaise vishyon par madad karta hoon. Kripya apna prashn unhi se juda hua poochho.';
+    if (text === '1') {
+      return 'Roz kam se kam 1 mala se shuru karo. Jab aadat ban jaaye to dheere-dheere 2–4 mala tak badha sakte ho, lekin niyamita rehna sabse zaroori hai.';
+    }
+    if (text === '2') {
+      return 'Shaant jagah par seedhe baitho, aankhen band karo, har manke par dhyaan se Bhagwan ka naam lo. Mobile side par rakh do, sirf shwas aur naam par dhyaan rakho.';
+    }
+    if (text === '3') {
+      return '108 ko shubh aur sampoorn sankhya maana gaya hai. Kahin 108 upanishad, 108 gopi, 108 nakshatra jaise sambandh bataye gaye hain, isliye mala me 108 manke hote hain.';
+    }
+    if (text === '4') {
+      return 'Bhagavad Gita sikhati hai ki apna kartavya imaandari se karo, fal ki chinta Bhagwan par chhod do, aur mann ko yog, gyaan aur bhakti se sthir rakho.';
+    }
+
+    return 'Samajh nahi paya. Pehle "menu" ya 0 type karke prashn list dekho, phir 1, 2, 3 ya 4 me se koi number bhejo.';
   }
 
   function handleSend() {
@@ -580,5 +597,6 @@
     if (e.key === 'Enter') handleSend();
   });
 </script>
+<!-- Bhakti Q&A Chat end -->
 </body>
 </html>
