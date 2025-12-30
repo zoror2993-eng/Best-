@@ -542,48 +542,8 @@
     }
 
     // initial load
-     <script>
-const GEMINI_KEY = atob('WEtuU3NmOWJUb0tZZmlER3NnMHpfeFdJcE90SzZQeFlZ');
-function openAI(){document.getElementById('aiChat').style.display='block';}
-function closeAI(){document.getElementById('aiChat').style.display='none';}
-async function askAI(){
-  const input = document.getElementById('aiInput');
-  const chat = document.getElementById('chatBox');
-  const q = input.value.toLowerCase();
-  if(!q) return;
-  
-  // ❌ NON-GITA Questions BLOCK
-  if(!q.includes('gita') && !q.includes('गीता') && !q.includes('shlok') && !q.includes('श्लोक') && 
-     !q.includes('bhakti') && !q.includes('भक्ति') && !q.includes('krishna') && !q.includes('कृष्ण') &&
-     !q.includes('arjun') && !q.includes('अर्जुन') && !q.includes('yog') && !q.includes('योग')) {
-    chat.innerHTML += `<div style="text-align:right;margin:10px 0;"><strong>तुम:</strong> ${input.value}</div>`;
-    chat.innerHTML += `<div style="text-align:left;margin:10px 0;"><strong>गीता AI:</strong> 🙏 केवल भगवद्गीता और भक्ति संबंधी प्रश्न पूछें। "श्लोक 1.1" या "कर्मयोग क्या?"</div>`;
-    input.value = '';
-    chat.scrollTop = chat.scrollHeight;
-    return;
-  }
-  
-  chat.innerHTML += `<div style="text-align:right;margin:10px 0;"><strong>तुम:</strong> ${input.value}</div>`;
-  input.value = '';
-  chat.innerHTML += `<div style="text-align:left;margin:10px 0;"><strong>गीता AI:</strong> सोच रहा हूँ... ⏳</div>`;
-  chat.scrollTop = chat.scrollHeight;
-  
-  try{
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        contents:[{parts:[{text:`भगवद्गीता का AI हो। केवल गीता/भक्ति प्रश्नों का सरल हिंदी में श्लोक नंबर सहित जवाब दो। Question: "${input.value}"`}]}]
-      })
-    });
-    const data = await res.json();
-    chat.innerHTML = chat.innerHTML.replace('सोच रहा हूँ... ⏳',data.candidates[0].content.parts[0].text);
-  }catch(e){
-    chat.innerHTML = chat.innerHTML.replace('सोच रहा हूँ... ⏳','❌ इंटरनेट चेक करो!');
-  }
-  chat.scrollTop = chat.scrollHeight;
-}
-  </script>
-   <script>loadCounts();showPage('naamJap');</script> 
+       loadCounts();
+showPage('naamJap');
   </script>
    </body>
 </html>
