@@ -231,6 +231,12 @@
 
       <!-- Gita Page -->
   <section id="gitaPage" class="card">
+     <!-- section id="gitaPage" के अंदर, h2 से PEHLE ये paste kar -->
+<div class="gita-nav">
+  <button class="chapter-btn active" onclick="showChapter(1)">📖 अध्याय 1</button>
+  <button class="chapter-btn" onclick="showChapter(2)">📖 अध्याय 2</button>
+</div>
+     <div id="chapter1" class="chapter active">
     <h2 class="gita-heading">अध्याय 1 – अर्जुन विषाद योग</h2>
     <p class="gita-intro">
       महाभारत के कुरुक्षेत्र-क्षेत्र में, युद्ध प्रारम्भ होने से ठीक पहले,
@@ -471,6 +477,7 @@
 <p><strong>श्लोक:</strong> संजय उवाच। एवमुक्त्वाऽर्जुनः संख्ये रथोपस्थ उपाविशत्। विसृज्य सशरं चापं शोकसंविग्नमानसः॥१.४७॥</p>
 <p><strong>Roman:</strong> Sanjay uvaacha. Evamuktvaa arjunaH sankhye rathopasthe upaavisat. VisRijya sasharaM chaapaM shokasaMvignamaanasaH॥1.47॥</p>
 <p><strong>अर्थ:</strong> Sanjay: Arjuna shok mein dhanush chhod rath pe baith gaya.</p>
+       </div>
   </section>
      <footer class="site-footer">
   <p class="footer-title">कर्म करते जाओ, फल श्रीकृष्ण पर छोड़ दो।</p>
@@ -479,7 +486,6 @@
   </main>
 
   <script>
-    // page switching
     function showPage(page) {
       const naamJapPage = document.getElementById('naamJapPage');
       const gitaPage = document.getElementById('gitaPage');
@@ -544,6 +550,23 @@
     // initial load
        loadCounts();
 showPage('naamJap');
+<style>
+.gita-nav{display:flex;gap:10px;padding:15px;background:white;border-radius:20px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+.chapter-btn{padding:12px 20px;background:#f1f5f9;color:#64748b;border:none;border-radius:25px;font-weight:600;cursor:pointer;flex:1;}
+.chapter-btn:hover{background:#e2e8f0;}
+.chapter-btn.active{background:#4f46e5;color:white;}
+.chapter{display:none;}
+.chapter.active{display:block;}
+</style>
+
+<script>
+function showChapter(n){
+  document.querySelectorAll('.chapter').forEach(c=>c.style.display='none');
+  document.querySelectorAll('.chapter-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('chapter'+n).style.display='block';
+  event.target.classList.add('active');
+}
+</script>
   </script>
    </body>
 </html>
