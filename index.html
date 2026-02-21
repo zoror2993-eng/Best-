@@ -1,6 +1,7 @@
    <!DOCTYPE html>
 <html lang="hi">
 <head>
+   <link rel="manifest" href="manifest.json">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Naam Jap & Gita</title>
@@ -543,6 +544,10 @@
     // initial load
        loadCounts();
 showPage('naamJap');
+      if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+
 </script>
   </script>
    </body>
